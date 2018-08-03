@@ -1,0 +1,52 @@
+{
+  "name": "spotted",
+  "description": "Spotted Markdown Editor",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Alex Luong",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "build": {
+    "appId": "com.alexluong.journal",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "scripts": {
+    "start": "concurrently \"yarn start:react\" \"wait-on http://localhost:3000 && yarn start:electron .\"",
+    "start:react": "react-app-rewired start",
+    "start:electron": "electron .",
+    "build": "yarn build:react && yarn build:electron",
+    "build:react": "react-app-rewired build",
+    "build:electron": "electron-builder",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject",
+    "format": "prettier --write \"src/**/*.js\""
+  },
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "electron-is-dev": "^0.3.0",
+    "electron-settings": "^3.2.0",
+    "emotion": "^9.2.6",
+    "markdown-to-jsx": "^6.7.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-ace": "^6.1.4",
+    "react-dom": "^16.4.1",
+    "react-emotion": "^9.2.6",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.1",
+    "electron": "^2.0.5",
+    "electron-builder": "^20.26.1",
+    "electron-react-devtools": "^0.5.3",
+    "prettier": "^1.14.0",
+    "react-app-rewired": "^1.5.2",
+    "wait-on": "^2.1.0"
+  }
+}
