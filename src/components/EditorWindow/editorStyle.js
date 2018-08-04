@@ -4,6 +4,7 @@ export default function setEditorStyle() {
   injectGlobal`
     .ace_editor {
       width: 100% !important;
+      height: 100% !important;
       background-color: #191324 !important;
       color: white;
     }

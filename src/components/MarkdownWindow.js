@@ -1,7 +1,6 @@
 import React from "react"
 import { css } from "react-emotion"
 import PropTypes from "prop-types"
-import Markdown from "markdown-to-jsx"
 
 const propTypes = {
   content: PropTypes.string.isRequired,
@@ -9,7 +8,7 @@ const propTypes = {
 
 const MarkdownWindow = ({ content, ...props }) => (
   <div {...props} className={markdownWindowCss}>
-    <Markdown>{content}</Markdown>
+    <div dangerouslySetInnerHTML={{ __html: content }} />
   </div>
 )
 
