@@ -1,6 +1,11 @@
 import { injectGlobal } from "react-emotion"
 
 export default function resetStyle() {
+  resetBaseStyle()
+  resetOutlineStyle()
+}
+
+function resetBaseStyle() {
   injectGlobal`
     *,
     *::after,
@@ -10,6 +15,7 @@ export default function resetStyle() {
       box-sizing: inherit;
       z-index: 1;
       font-size: inherit;
+      overflow: hidden;
     }
     html,
     body {
@@ -30,6 +36,22 @@ export default function resetStyle() {
     #root {
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+  `
+}
+
+function resetOutlineStyle() {
+  injectGlobal`
+    input,
+    textarea,
+    button {
+      &:active,
+      &:focus {
+        outline: none;
+      }
     }
   `
 }
