@@ -112,8 +112,7 @@ class App extends React.Component {
       <React.Fragment>
         <Header
           headerContent={
-            // filesData[activeIndex] ? filesData[activeIndex].name : "Spotted"
-            "Spotted"
+            filesData[activeIndex] ? filesData[activeIndex].name : "Spotted"
           }
         />
 
