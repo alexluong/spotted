@@ -51,7 +51,11 @@ class App extends React.Component {
 
   readAndLoadFilesInDirectory = async directory => {
     const filesData = await fileActions.readFilesInDirectory(directory)
-    this.setState({ filesData }, () => this.loadCurrentFileData(0))
+    this.setState({ filesData }, () => {
+      if (filesData.length > 0) {
+        this.loadCurrentFileData(0)
+      }
+    })
   }
 
   loadCurrentFileData(index) {
@@ -111,9 +115,9 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header
-          headerContent={
-            filesData[activeIndex] ? filesData[activeIndex].name : "Spotted"
-          }
+          headerContent={`Spotted - ${directory.substring(
+            directory.lastIndexOf("/") + 1,
+          )}${filesData[activeIndex] ? `/${filesData[activeIndex].name}` : ""}`}
         />
 
         {directory ? (
