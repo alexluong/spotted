@@ -15,7 +15,6 @@ import setSplitPaneStyle from "./styles/setSplitPaneStyle"
 
 import fileActions from "actions/file"
 
-const { ipcRenderer } = window.require("electron")
 const settings = window.require("electron-settings")
 
 // const Researcher = YoastSEO.Researcher
@@ -37,28 +36,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    ipcRenderer.on("new-dir", this.onNewDir)
-    ipcRenderer.on("save-file", this.onSaveFile)
-
     const { directory } = this.state
     if (directory) {
       this.readAndLoadFilesInDirectory(directory)
     }
-  }
-
-  componentWillUnmount() {
-    ipcRenderer.removeListener("new-dir", this.onNewDir)
-    ipcRenderer.removeListener("save-file", this.onSaveFile)
-  }
-
-  onNewDir = (e, directory) => {
-    this.props.setFileState({ directory })
-    settings.set("directory", directory)
-    this.readAndLoadFilesInDirectory(directory)
-  }
-
-  onSaveFile = () => {
-    this.saveFile()
   }
 
   setStateWithHTML(state) {
