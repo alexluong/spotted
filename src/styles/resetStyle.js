@@ -24,6 +24,7 @@ function resetBaseStyle() {
     }
     html {
       font-size: 62.5%; /* defines 1rem = 10px */
+      -webkit-font-smoothing: antialiased;
     }
     body {
       box-sizing: border-box;
@@ -32,6 +33,10 @@ function resetBaseStyle() {
       font-size: 1.6rem;
       line-height: 1.7;
       color: #000;
+    }
+    ul,
+    li {
+      list-style-position: inside;
     }
     #root {
       width: 100%;

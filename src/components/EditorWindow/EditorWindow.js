@@ -16,6 +16,7 @@ const EditorWindow = ({ value, onEditorChange, ...props }) => (
       mode="markdown"
       theme="dracula"
       name="markdown_editor"
+      fontSize={14}
       showGutter={false}
       showPrintMargin={false}
       value={value}

@@ -123,7 +123,7 @@ class App extends React.Component {
     const currentFileName = filesData[activeIndex]
       ? `/${filesData[activeIndex].name}`
       : ""
-    const headerContent = `Spotted - ${directoryName}}${currentFileName}`
+    const headerContent = `Spotted - ${directoryName}${currentFileName}`
 
     // const researcher = new Researcher(new Paper(html))
     // console.log({
