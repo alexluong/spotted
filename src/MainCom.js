@@ -14,11 +14,13 @@ class MainCom extends React.Component {
   componentDidMount() {
     ipcRenderer.on("new-dir", this.onNewDir)
     ipcRenderer.on("save-file", this.onSaveFile)
+    ipcRenderer.on("analyze", this.onAnalyze)
   }
 
   componentWillUnmount() {
     ipcRenderer.removeListener("new-dir", this.onNewDir)
     ipcRenderer.removeListener("save-file", this.onSaveFile)
+    ipcRenderer.removeListener("analyze", this.onAnalyze)
   }
 
   onNewDir = (e, directory) => {
@@ -29,6 +31,10 @@ class MainCom extends React.Component {
 
   onSaveFile = () => {
     this.app.saveFile()
+  }
+
+  onAnalyze = (e, type) => {
+    this.app.analyze(type)
   }
 
   render() {

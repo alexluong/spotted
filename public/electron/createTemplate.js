@@ -57,6 +57,24 @@ module.exports = function createTemplate(mainWindow, actions) {
       ],
     },
     {
+      label: "Analysis",
+      submenu: [
+        {
+          label: "Text",
+          accelerator: "CmdOrCtrl+Shift+A",
+          click: () => {
+            mainWindow.webContents.send("analyze", "text")
+          },
+        },
+        {
+          label: "Readability",
+          click: () => {
+            mainWindow.webContents.send("analyze", "readability")
+          },
+        },
+      ],
+    },
+    {
       role: "window",
       submenu: [{ role: "minimize" }, { role: "close" }],
     },

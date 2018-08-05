@@ -1,14 +1,24 @@
 import React from "react"
 import { css } from "react-emotion"
 import PropTypes from "prop-types"
+// Components
+import Readability from "./AnalysisContent/Readability"
 
 const propTypes = {
-  content: PropTypes.string.isRequired,
+  html: PropTypes.string.isRequired,
+  markdown: PropTypes.string.isRequired,
+  analysis: PropTypes.string.isRequired,
 }
 
-const MarkdownWindow = ({ content, ...props }) => (
+const MarkdownWindow = ({ html, markdown, analysis, ...props }) => (
   <div {...props} className={markdownWindowCss}>
-    <div dangerouslySetInnerHTML={{ __html: content }} />
+    {(() => {
+      if (!analysis) {
+        return <div dangerouslySetInnerHTML={{ __html: html }} />
+      } else if (analysis === "readability") {
+        return <Readability markdown={markdown} />
+      }
+    })()}
   </div>
 )
 

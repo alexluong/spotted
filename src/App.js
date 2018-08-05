@@ -1,6 +1,6 @@
 import React from "react"
 import { css } from "react-emotion"
-import showdown from "showdown"
+// import showdown from "showdown"
 // import YoastSEO from "yoastseo" // Need to change in node_modules (temp fix)
 import SplitPane from "react-split-pane"
 // components
@@ -8,12 +8,13 @@ import Header from "components/Header"
 import Greeting from "components/Greeting"
 import FilesWindow from "components/FilesWindow"
 import EditorWindow from "components/EditorWindow"
-import MarkdownWindow from "components/MarkdownWindow"
+import ContentWindow from "components/ContentWindow"
 // styles
 import resetStyle from "./styles/resetStyle"
 import setSplitPaneStyle from "./styles/setSplitPaneStyle"
 
 import fileActions from "actions/file"
+import unifiedActions from "actions/unified"
 
 const settings = window.require("electron-settings")
 
@@ -23,8 +24,8 @@ const settings = window.require("electron-settings")
 resetStyle()
 setSplitPaneStyle()
 
-const Converter = new showdown.Converter({ table: true })
-const convertMarkdownToHTML = markdown => Converter.makeHtml(markdown)
+// const Converter = new showdown.Converter({ table: true })
+// const convertMarkdownToHTML = markdown => Converter.makeHtml(markdown)
 
 class App extends React.Component {
   state = {
@@ -33,6 +34,7 @@ class App extends React.Component {
     filesData: [],
     activeIndex: 0,
     directory: settings.get("directory") || "",
+    analysis: "",
   }
 
   componentDidMount() {
@@ -42,11 +44,10 @@ class App extends React.Component {
     }
   }
 
-  setStateWithHTML(state) {
-    this.setState({
-      ...state,
-      html: convertMarkdownToHTML(state.markdown),
-    })
+  setStateWithHTML = async state => {
+    const html = await unifiedActions.convertMarkdownToHTML(state.markdown)
+
+    this.setState({ ...state, html })
   }
 
   readAndLoadFilesInDirectory = async directory => {
@@ -96,6 +97,11 @@ class App extends React.Component {
     }
   }
 
+  analyze(type) {
+    // unifiedActions.analyze(type, this.state.markdown)
+    this.setState({ analysis: type })
+  }
+
   changeActiveFile = incomingIndex => () => {
     if (incomingIndex !== this.state.activeIndex) {
       this.saveFile()
@@ -104,7 +110,20 @@ class App extends React.Component {
   }
 
   render() {
-    const { markdown, html, directory, filesData, activeIndex } = this.state
+    const {
+      markdown,
+      html,
+      directory,
+      filesData,
+      activeIndex,
+      analysis,
+    } = this.state
+
+    const directoryName = directory.substring(directory.lastIndexOf("/") + 1)
+    const currentFileName = filesData[activeIndex]
+      ? `/${filesData[activeIndex].name}`
+      : ""
+    const headerContent = `Spotted - ${directoryName}}${currentFileName}`
 
     // const researcher = new Researcher(new Paper(html))
     // console.log({
@@ -114,11 +133,7 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <Header
-          headerContent={`Spotted - ${directory.substring(
-            directory.lastIndexOf("/") + 1,
-          )}${filesData[activeIndex] ? `/${filesData[activeIndex].name}` : ""}`}
-        />
+        <Header headerContent={headerContent} />
 
         {directory ? (
           <SplitPane split="vertical" defaultSize="20%" className={splitCss}>
@@ -137,7 +152,11 @@ class App extends React.Component {
                 }
               />
 
-              <MarkdownWindow content={html} />
+              <ContentWindow
+                html={html}
+                markdown={markdown}
+                analysis={analysis}
+              />
             </SplitPane>
           </SplitPane>
         ) : (
