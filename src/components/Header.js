@@ -1,13 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { cx, css } from "react-emotion"
+import Color from "utilities/Color"
 
 const propTypes = {
   headerContent: PropTypes.string.isRequired,
 }
 
 const Header = ({ headerContent, className, ...props }) => (
-  <header className={cx(headerCss, className)}>{headerContent}</header>
+  <header className={cx(headerCss, className)} {...props}>
+    {headerContent}
+  </header>
 )
 
 Header.propTypes = propTypes
@@ -15,8 +18,8 @@ Header.propTypes = propTypes
 export default Header
 
 const headerCss = css`
-  background-color: #191324;
-  color: #75717c;
+  background-color: ${Color.get("background")};
+  color: ${Color.get("backgroundLight")};
   font-size: 1.4rem;
   height: 23px;
   line-height: 23px;

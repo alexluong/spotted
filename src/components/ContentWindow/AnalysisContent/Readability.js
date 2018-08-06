@@ -43,13 +43,16 @@ class Readability extends React.Component {
   }
 
   render() {
-    const { markdown, ...props } = this.props
+    const { markdown, html, ...props } = this.props
 
     const text = unifiedActions.convertMarkdownToText(markdown)
     const textTree = unifiedActions.buildTextTree(text)
 
     const all = this.renderAll(textTree, [])
-    console.log(all)
+
+    const { htmlTree, analysis } = readabilityActions.runAnalysis(html)
+    console.log({ htmlTree, analysis })
+    console.log(analysis.messages[0].message)
 
     return (
       <div {...props} style={{ color: "#fff" }}>

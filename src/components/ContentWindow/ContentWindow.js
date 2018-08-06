@@ -1,5 +1,4 @@
 import React from "react"
-import { css } from "react-emotion"
 import PropTypes from "prop-types"
 import styles from "./styles"
 // Components
@@ -17,7 +16,7 @@ const ContentWindow = ({ html, markdown, analysis, ...props }) => (
       if (!analysis) {
         return <div dangerouslySetInnerHTML={{ __html: html }} />
       } else if (analysis === "readability") {
-        return <Readability markdown={markdown} />
+        return <Readability markdown={markdown} html={html} />
       }
     })()}
   </div>

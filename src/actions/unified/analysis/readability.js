@@ -17,7 +17,33 @@ import smog from "smog-formula"
 import gunningFog from "gunning-fog"
 import spacheFormula from "spache-formula"
 
+import unified from "unified"
+import english from "retext-english"
+import readability from "retext-readability"
+import rehype2retext from "rehype-retext"
+import htmlStringify from "rehype-stringify"
+import htmlParser from "rehype-parse"
+
+import unifiedActions from "../unified"
+
 const readabilityActions = {}
+
+const readabilityProcessor = unified()
+  .use(htmlParser)
+  .use(
+    rehype2retext,
+    unified()
+      .use(english)
+      .use(readability),
+  )
+  .use(htmlStringify)
+
+readabilityActions.runAnalysis = function(html) {
+  const htmlTree = unifiedActions.createHtmlTree(html)
+  const analysis = readabilityProcessor.processSync(html)
+
+  return { htmlTree, analysis }
+}
 
 const averages = { mean, median, mode }
 

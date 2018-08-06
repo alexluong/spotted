@@ -1,17 +1,18 @@
 import { injectGlobal } from "react-emotion"
+import Color from "utilities/Color"
 
 export default function setEditorStyle() {
   injectGlobal`
     .ace_editor {
       width: 100% !important;
       height: 100% !important;
-      background-color: #191324 !important;
+      background-color: ${Color.get("background")} !important;
       color: white;
     }
 
     .ace_editor .ace_gutter {
-      background: #191324;
-      color: white;
+      background: ${Color.get("background")};
+      color: ${Color.get("text")};
     }
 
     .ace_editor .ace_list {
@@ -19,19 +20,19 @@ export default function setEditorStyle() {
     }
 
     .ace_editor .ace_gutter-active-line {
-      background-color: #373142;
+      background-color: ${Color.get("backgroundLight")};
     }
 
     .ace_editor .ace_heading {
-      color: #82d8d8;
+      color: ${Color.get("primary")};
     }
 
     .ace_editor .ace_cursor {
-      color: white;
+      color: ${Color.get("text")};
     }
 
     .ace_editor .ace_string {
-      color: #e54b4b;
+      color: ${Color.get("secondary")};
     }
   `
 }

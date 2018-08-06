@@ -6,6 +6,7 @@ import dateFns from "date-fns"
 import Button from "elements/Button"
 import Input from "elements/Input"
 import Toggle from "utilities/Toggle"
+import Color from "utilities/Color"
 
 class FilesWindow extends React.Component {
   static propTypes = {
@@ -30,7 +31,7 @@ class FilesWindow extends React.Component {
     return (
       <Toggle>
         {({ on: isAddingNewEntry, toggle }) => (
-          <div className={filesWindowCss}>
+          <div className={containerCss}>
             <Button onClick={toggle}>+ New Entry</Button>
 
             {isAddingNewEntry && (
@@ -71,40 +72,29 @@ class FilesWindow extends React.Component {
 
 export default FilesWindow
 
-const filesWindowCss = css`
-  background-color: #140f1d;
-  border-right: 1px solid #302b3a;
+const containerCss = css`
+  background-color: ${Color.get("backgroundDark")};
+  border-right: 1px solid ${Color.get("backgroundLight")};
   height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
-
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.3) inset;
-  }
 `
 
 const activeButtonCss = css`
   opacity: 1;
-  border-left: 4px solid #82d8d8;
+  border-left: 4px solid ${Color.get("primary")};
 `
 
 const FileButton = styled.button`
   padding: 1rem;
   width: 100%;
-  background-color: #191324;
+  background-color: ${Color.get("background")};
   opacity: 0.4;
-  color: #fff;
+  color: ${Color.get("text")};
   text-align: left;
   border: none;
-  border-bottom: 1px solid #302b3a;
+  border-bottom: 1px solid ${Color.get("backgroundLight")};
   cursor: pointer;
   transition: all 0.3s ease;
 

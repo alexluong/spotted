@@ -8,6 +8,7 @@ import remark from "remark"
 import remark2rehype from "remark-rehype"
 import remark2retext from "remark-retext"
 import markdown from "remark-parse"
+import html from "rehype-parse"
 import stripMarkdown from "strip-markdown"
 import rehypeStringify from "rehype-stringify"
 import retextStringify from "retext-stringify"
@@ -30,6 +31,17 @@ const toHtmlProcessor = unified()
   .use(markdown)
   .use(remark2rehype)
   .use(rehypeStringify)
+
+const mdProcessor = unified().use(markdown)
+const htmlProcessor = unified().use(html)
+
+unifiedActions.createMarkdownTree = function(md) {
+  return mdProcessor.runSync(mdProcessor.parse(md))
+}
+
+unifiedActions.createHtmlTree = function(htmlContent) {
+  return htmlProcessor.runSync(htmlProcessor.parse(htmlContent))
+}
 
 unifiedActions.convertMarkdownToHTML = function(md) {
   return String(toHtmlProcessor.processSync(md))

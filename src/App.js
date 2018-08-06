@@ -1,6 +1,5 @@
 import React from "react"
 import { css } from "react-emotion"
-// import showdown from "showdown"
 // import YoastSEO from "yoastseo" // Need to change in node_modules (temp fix)
 import SplitPane from "react-split-pane"
 // components
@@ -23,9 +22,6 @@ const settings = window.require("electron-settings")
 
 resetStyle()
 setSplitPaneStyle()
-
-// const Converter = new showdown.Converter({ table: true })
-// const convertMarkdownToHTML = markdown => Converter.makeHtml(markdown)
 
 class App extends React.Component {
   state = {

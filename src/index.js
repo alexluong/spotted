@@ -1,15 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import ErrorBoundary from "./ErrorBoundary"
-import MainCom from "./MainCom"
+import Setup from "./Setup"
 
-const Root = () => (
-  <ErrorBoundary>
-    <MainCom />
-  </ErrorBoundary>
-)
-
-ReactDOM.render(<Root />, document.getElementById("root"))
+ReactDOM.render(<Setup />, document.getElementById("root"))
 
 // FIXME: Remove these some time...
 const { warn } = console

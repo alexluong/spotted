@@ -1,15 +1,16 @@
 import { css } from "react-emotion"
+import Color from "utilities/Color"
 
 const styles = {}
 
 styles.contentWindowCss = css`
-  background-color: #191324;
+  background-color: ${Color.get("background")};
   width: 100%;
   height: 100%;
   overflow: scroll;
   padding: 2rem;
-  color: #fff;
-  border-left: 1px solid #302b3a;
+  color: ${Color.get("text")};
+  border-left: 1px solid ${Color.get("backgroundLight")};
 
   & > div {
     padding-bottom: 95vh;
@@ -21,7 +22,7 @@ styles.contentWindowCss = css`
   h4,
   h5,
   h6 {
-    color: #82d8d8;
+    color: ${Color.get("primary")};
     margin-top: 1rem;
   }
 
@@ -34,7 +35,7 @@ styles.contentWindowCss = css`
       position: absolute;
       width: 100%;
       height: 3px;
-      background-color: #e54b4b;
+      background-color: ${Color.get("secondary")};
       left: 0;
       bottom: 0.2rem;
     }
@@ -80,7 +81,7 @@ styles.contentWindowCss = css`
   }
 
   a {
-    color: #e54b4b;
+    color: ${Color.get("secondary")};
   }
 
   ul,

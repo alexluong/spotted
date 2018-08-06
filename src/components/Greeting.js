@@ -1,5 +1,6 @@
 import React from "react"
 import { css } from "react-emotion"
+import Color from "utilities/Color"
 
 const Greeting = () => (
   <div className={greetingCss}>
@@ -14,9 +15,8 @@ const greetingCss = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  background-color: #191324;
-
+  color: ${Color.get("text")};
+  background-color: ${Color.get("background")};
   h1 {
     font-size: 2.4rem;
   }

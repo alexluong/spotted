@@ -4,6 +4,7 @@ import React from "react"
 import { css } from "react-emotion"
 import PropTypes from "prop-types"
 import AceEditor from "react-ace"
+import Color from "utilities/Color"
 
 const propTypes = {
   value: PropTypes.string.isRequired,
@@ -32,6 +33,6 @@ export default EditorWindow
 const editorWindowCss = css`
   flex: 1;
   padding-top: 2rem;
-  background-color: #191324;
+  background-color: ${Color.get("background")};
   height: 100%;
 `
