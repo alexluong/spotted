@@ -2,6 +2,7 @@
 const { app, BrowserWindow, Menu, shell } = require("electron")
 const isDev = require("electron-is-dev")
 const path = require("path")
+const settings = require("electron-settings")
 
 const createActions = require("./electron/createActions")
 const createTemplate = require("./electron/createTemplate")
@@ -30,6 +31,12 @@ function createWindow() {
   const template = createTemplate(mainWindow, actions)
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
+
+  // Setup color theme
+  const theme = settings.get("colorTheme")
+  if (!theme) {
+    settings.set("colorTheme", "dark")
+  }
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

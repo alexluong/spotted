@@ -19,7 +19,7 @@ export default Header
 
 const headerCss = css`
   background-color: ${Color.get("background")};
-  color: ${Color.get("backgroundLight")};
+  color: ${Color.get("headerText")};
   font-size: 1.4rem;
   height: 23px;
   line-height: 23px;

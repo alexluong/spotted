@@ -5,6 +5,8 @@ const { ipcRenderer } = window.require("electron")
 const settings = window.require("electron-settings")
 
 class MainCom extends React.Component {
+  state = { colorTheme: settings.get("colorTheme") }
+
   constructor(props) {
     super(props)
 
@@ -15,12 +17,14 @@ class MainCom extends React.Component {
     ipcRenderer.on("new-dir", this.onNewDir)
     ipcRenderer.on("save-file", this.onSaveFile)
     ipcRenderer.on("analyze", this.onAnalyze)
+    ipcRenderer.on("switch-color-theme", this.onSwitchColorTheme)
   }
 
   componentWillUnmount() {
     ipcRenderer.removeListener("new-dir", this.onNewDir)
     ipcRenderer.removeListener("save-file", this.onSaveFile)
     ipcRenderer.removeListener("analyze", this.onAnalyze)
+    ipcRenderer.removeListener("switch-color-theme", this.onSwitchColorTheme)
   }
 
   onNewDir = (e, directory) => {
@@ -35,6 +39,11 @@ class MainCom extends React.Component {
 
   onAnalyze = (e, type) => {
     this.app.analyze(type)
+  }
+
+  onSwitchColorTheme = (e, colorTheme) => {
+    settings.set("colorTheme", colorTheme)
+    this.setState({ colorTheme: colorTheme })
   }
 
   render() {

@@ -49,6 +49,21 @@ module.exports = function createTemplate(mainWindow, actions) {
         { role: "forcereload" },
         { role: "toggledevtools" },
         { type: "separator" },
+        {
+          label: "Light mode",
+          click: () => {
+            mainWindow.webContents.send("switch-color-theme", "light")
+            mainWindow.webContents.reload()
+          },
+        },
+        {
+          label: "Dark mode",
+          click: () => {
+            mainWindow.webContents.send("switch-color-theme", "dark")
+            mainWindow.webContents.reload()
+          },
+        },
+        { type: "separator" },
         { role: "resetzoom" },
         { role: "zoomin" },
         { role: "zoomout" },
@@ -64,12 +79,14 @@ module.exports = function createTemplate(mainWindow, actions) {
           accelerator: "CmdOrCtrl+Shift+A",
           click: () => {
             mainWindow.webContents.send("analyze", "text")
+            mainWindow.webContents.reloadIgnoringCache()
           },
         },
         {
           label: "Readability",
           click: () => {
             mainWindow.webContents.send("analyze", "readability")
+            mainWindow.webContents.reloadIgnoringCache()
           },
         },
       ],
@@ -147,7 +164,7 @@ module.exports = function createTemplate(mainWindow, actions) {
     )
 
     // Window menu
-    template[3].submenu = [
+    template[5].submenu = [
       { role: "close" },
       { role: "minimize" },
       { role: "zoom" },

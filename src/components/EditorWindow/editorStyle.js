@@ -7,7 +7,7 @@ export default function setEditorStyle() {
       width: 100% !important;
       height: 100% !important;
       background-color: ${Color.get("background")} !important;
-      color: white;
+      color: ${Color.get("text")} !important;
     }
 
     .ace_editor .ace_gutter {
@@ -16,7 +16,7 @@ export default function setEditorStyle() {
     }
 
     .ace_editor .ace_list {
-      color: #d8d8d8;
+      color: ${Color.get("text")};
     }
 
     .ace_editor .ace_gutter-active-line {
@@ -28,11 +28,15 @@ export default function setEditorStyle() {
     }
 
     .ace_editor .ace_cursor {
-      color: ${Color.get("text")};
+      color: ${Color.get("text")} !important;
     }
 
     .ace_editor .ace_string {
       color: ${Color.get("secondary")};
+    }
+
+    .ace_active-line {
+      background: ${Color.get("backgroundLight")} !important;
     }
   `
 }
