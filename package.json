@@ -39,6 +39,7 @@
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.2.0",
     "emotion": "^9.2.6",
+    "emotion-theming": "^9.2.6",
     "flesch": "^1.0.2",
     "gunning-fog": "^1.0.3",
     "lerp": "^1.0.3",

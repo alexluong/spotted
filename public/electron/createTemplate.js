@@ -53,14 +53,12 @@ module.exports = function createTemplate(mainWindow, actions) {
           label: "Light mode",
           click: () => {
             mainWindow.webContents.send("switch-color-theme", "light")
-            mainWindow.webContents.reload()
           },
         },
         {
           label: "Dark mode",
           click: () => {
             mainWindow.webContents.send("switch-color-theme", "dark")
-            mainWindow.webContents.reload()
           },
         },
         { type: "separator" },

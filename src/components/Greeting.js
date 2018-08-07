@@ -1,22 +1,21 @@
 import React from "react"
-import { css } from "react-emotion"
-import Color from "utilities/Color"
+import styled from "react-emotion"
 
 const Greeting = () => (
-  <div className={greetingCss}>
+  <Container>
     <h1>Press Cmd + O to open directory</h1>
-  </div>
+  </Container>
 )
 
 export default Greeting
 
-const greetingCss = css`
+const Container = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${Color.get("text")};
-  background-color: ${Color.get("background")};
+  color: ${props => props.theme.text};
+  background-color: ${props => props.theme.background};
   h1 {
     font-size: 2.4rem;
   }

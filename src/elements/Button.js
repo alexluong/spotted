@@ -1,18 +1,15 @@
 import React from "react"
-import { css, cx } from "react-emotion"
-import Color from "utilities/Color"
+import styled from "react-emotion"
 
-const Button = ({ className, ...props }) => (
-  <button {...props} className={cx(buttonCss, className)} />
-)
+const Button = props => <StyledButton {...props} />
 
 export default Button
 
-const buttonCss = css`
+const StyledButton = styled.button`
   display: block;
   background-color: transparent;
-  color: ${Color.get("text")};
-  border: 1px solid ${Color.get("primary")};
+  color: ${props => props.theme.text};
+  border: 1px solid ${props => props.theme.primary};
   border-radius: 4px;
   margin: 1rem auto;
   font-size: 1.6rem;
@@ -20,7 +17,7 @@ const buttonCss = css`
   cursor: pointer;
   transition: all 0.3s ease;
   &:hover {
-    background-color: ${Color.get("primary")};
-    color: ${Color.get("background")};
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.background};
   }
 `

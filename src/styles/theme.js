@@ -1,6 +1,3 @@
-const settings = window.require("electron-settings")
-const colorTheme = settings.get("colorTheme")
-
 const light = {
   primary: "#82d8d8",
   secondary: "#e54b4b",
@@ -23,11 +20,8 @@ const dark = {
 
 const color = { light, dark }
 
-class Color {
-  static get(type) {
-    console.log(colorTheme)
-    return color[colorTheme][type]
-  }
+function createTheme(theme) {
+  return color[theme]
 }
 
-export default Color
+export default createTheme

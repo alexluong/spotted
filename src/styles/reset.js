@@ -16,6 +16,7 @@ function resetBaseStyle() {
       z-index: 1;
       font-size: inherit;
       overflow: hidden;
+      transition: color .2s ease, background-color .2s ease;
     }
     html,
     body {

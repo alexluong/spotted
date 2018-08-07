@@ -1,25 +1,22 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { cx, css } from "react-emotion"
-import Color from "utilities/Color"
+import styled from "react-emotion"
 
 const propTypes = {
   headerContent: PropTypes.string.isRequired,
 }
 
-const Header = ({ headerContent, className, ...props }) => (
-  <header className={cx(headerCss, className)} {...props}>
-    {headerContent}
-  </header>
+const Header = ({ headerContent, ...props }) => (
+  <StyledHeader {...props}>{headerContent}</StyledHeader>
 )
 
 Header.propTypes = propTypes
 
 export default Header
 
-const headerCss = css`
-  background-color: ${Color.get("background")};
-  color: ${Color.get("headerText")};
+const StyledHeader = styled.header`
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.headerText};
   font-size: 1.4rem;
   height: 23px;
   line-height: 23px;

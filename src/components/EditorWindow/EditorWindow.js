@@ -1,10 +1,9 @@
 // FIXME: Emoji is not working well with editor yet!!!
 
 import React from "react"
-import { css } from "react-emotion"
 import PropTypes from "prop-types"
 import AceEditor from "react-ace"
-import Color from "utilities/Color"
+import EditorWindowContainer from "./Container"
 
 const propTypes = {
   value: PropTypes.string.isRequired,
@@ -12,7 +11,7 @@ const propTypes = {
 }
 
 const EditorWindow = ({ value, onEditorChange, ...props }) => (
-  <div {...props} className={editorWindowCss}>
+  <EditorWindowContainer {...props}>
     <AceEditor
       mode="markdown"
       theme="dracula"
@@ -23,16 +22,9 @@ const EditorWindow = ({ value, onEditorChange, ...props }) => (
       value={value}
       onChange={onEditorChange}
     />
-  </div>
+  </EditorWindowContainer>
 )
 
 EditorWindow.propTypes = propTypes
 
 export default EditorWindow
-
-const editorWindowCss = css`
-  flex: 1;
-  padding-top: 2rem;
-  background-color: ${Color.get("background")};
-  height: 100%;
-`

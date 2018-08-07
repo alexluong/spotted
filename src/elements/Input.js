@@ -1,19 +1,16 @@
 import React from "react"
-import { css, cx } from "react-emotion"
-import Color from "utilities/Color"
+import styled from "react-emotion"
 
-const Input = ({ className, ...props }) => (
-  <input {...props} className={cx(inputCss, className)} />
-)
+const Input = props => <StyledInput {...props} />
 
 export default Input
 
-const inputCss = css`
+const StyledInput = styled.input`
   display: block;
   max-width: 100%;
   width: 100%;
   margin: 1rem 0;
   padding: 1rem;
   background-color: transparent;
-  color: ${Color.get("text")};
+  color: ${props => props.theme.text};
 `

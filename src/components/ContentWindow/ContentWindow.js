@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import styles from "./styles"
 // Components
+import ContentWindowContainer from "./Container"
 import Readability from "./AnalysisContent/Readability"
 
 const propTypes = {
@@ -11,7 +11,7 @@ const propTypes = {
 }
 
 const ContentWindow = ({ html, markdown, analysis, ...props }) => (
-  <div {...props} className={styles.contentWindowCss}>
+  <ContentWindowContainer {...props}>
     {(() => {
       if (!analysis) {
         return <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -19,7 +19,7 @@ const ContentWindow = ({ html, markdown, analysis, ...props }) => (
         return <Readability markdown={markdown} html={html} />
       }
     })()}
-  </div>
+  </ContentWindowContainer>
 )
 
 ContentWindow.propTypes = propTypes

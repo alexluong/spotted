@@ -6,7 +6,6 @@ import dateFns from "date-fns"
 import Button from "elements/Button"
 import Input from "elements/Input"
 import Toggle from "utilities/Toggle"
-import Color from "utilities/Color"
 
 class FilesWindow extends React.Component {
   static propTypes = {
@@ -31,7 +30,7 @@ class FilesWindow extends React.Component {
     return (
       <Toggle>
         {({ on: isAddingNewEntry, toggle }) => (
-          <div className={containerCss}>
+          <FilesWindowContainer>
             <Button onClick={toggle}>+ New Entry</Button>
 
             {isAddingNewEntry && (
@@ -63,7 +62,7 @@ class FilesWindow extends React.Component {
                 </FileButton>
               ))}
             </div>
-          </div>
+          </FilesWindowContainer>
         )}
       </Toggle>
     )
@@ -72,36 +71,37 @@ class FilesWindow extends React.Component {
 
 export default FilesWindow
 
-const containerCss = css`
-  background-color: ${Color.get("backgroundDark")};
-  border-right: 1px solid ${Color.get("backgroundLight")};
+const FilesWindowContainer = styled.div`
+  background-color: ${props => props.theme.backgroundDark};
+  border-right: 1px solid ${props => props.theme.backgroundLight};
   height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
 `
 
-const activeButtonCss = css`
-  opacity: 1;
-  border-left: 4px solid ${Color.get("primary")};
-`
-
 const FileButton = styled.button`
   padding: 1rem;
   width: 100%;
-  background-color: ${Color.get("background")};
+  background-color: ${props => props.theme.background};
   opacity: 0.4;
-  color: ${Color.get("text")};
+  color: ${props => props.theme.text};
   text-align: left;
   border: none;
-  border-bottom: 1px solid ${Color.get("backgroundLight")};
+  border-bottom: 1px solid ${props => props.theme.backgroundLight};
   cursor: pointer;
   transition: all 0.3s ease;
 
-  ${({ active }) => active && activeButtonCss};
+  ${({ active }) =>
+    active &&
+    `
+      opacity: 1;
+      border-left: 4px solid ${props => props.theme.primary};
+  `};
 
   &:hover {
-    ${activeButtonCss};
+    opacity: 1;
+    border-left: 4px solid ${props => props.theme.primary};
   }
 
   .title {

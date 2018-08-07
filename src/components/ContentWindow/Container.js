@@ -1,16 +1,13 @@
-import { css } from "react-emotion"
-import Color from "utilities/Color"
+import styled from "react-emotion"
 
-const styles = {}
-
-styles.contentWindowCss = css`
-  background-color: ${Color.get("background")};
+const ContentWindowContainer = styled.div`
+  background-color: ${props => props.theme.background};
   width: 100%;
   height: 100%;
   overflow: scroll;
   padding: 2rem;
-  color: ${Color.get("text")};
-  border-left: 1px solid ${Color.get("backgroundLight")};
+  color: ${props => props.theme.text};
+  border-left: 1px solid ${props => props.theme.backgroundLight};
 
   & > div {
     padding-bottom: 95vh;
@@ -22,7 +19,7 @@ styles.contentWindowCss = css`
   h4,
   h5,
   h6 {
-    color: ${Color.get("primary")};
+    color: ${props => props.theme.primary};
     margin-top: 1rem;
   }
 
@@ -35,7 +32,7 @@ styles.contentWindowCss = css`
       position: absolute;
       width: 100%;
       height: 3px;
-      background-color: ${Color.get("secondary")};
+      background-color: ${props => props.theme.secondary};
       left: 0;
       bottom: 0.2rem;
     }
@@ -81,7 +78,7 @@ styles.contentWindowCss = css`
   }
 
   a {
-    color: ${Color.get("secondary")};
+    color: ${props => props.theme.secondary};
   }
 
   ul,
@@ -120,4 +117,4 @@ styles.contentWindowCss = css`
   }
 `
 
-export default styles
+export default ContentWindowContainer

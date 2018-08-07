@@ -8,9 +8,6 @@ import Greeting from "components/Greeting"
 import FilesWindow from "components/FilesWindow"
 import EditorWindow from "components/EditorWindow"
 import ContentWindow from "components/ContentWindow"
-// styles
-import resetStyle from "./styles/resetStyle"
-import setSplitPaneStyle from "./styles/setSplitPaneStyle"
 
 import fileActions from "actions/file"
 import unifiedActions from "actions/unified"
@@ -19,9 +16,6 @@ const settings = window.require("electron-settings")
 
 // const Researcher = YoastSEO.Researcher
 // const Paper = YoastSEO.Paper
-
-resetStyle()
-setSplitPaneStyle()
 
 class App extends React.Component {
   state = {

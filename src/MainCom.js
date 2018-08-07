@@ -1,11 +1,14 @@
 import React from "react"
+import PropTypes from "prop-types"
 import App from "./App"
 
 const { ipcRenderer } = window.require("electron")
 const settings = window.require("electron-settings")
 
 class MainCom extends React.Component {
-  state = { colorTheme: settings.get("colorTheme") }
+  static propTypes = {
+    switchColorTheme: PropTypes.func.isRequired,
+  }
 
   constructor(props) {
     super(props)
@@ -42,8 +45,7 @@ class MainCom extends React.Component {
   }
 
   onSwitchColorTheme = (e, colorTheme) => {
-    settings.set("colorTheme", colorTheme)
-    this.setState({ colorTheme: colorTheme })
+    this.props.switchColorTheme(colorTheme)
   }
 
   render() {
