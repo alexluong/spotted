@@ -84,7 +84,6 @@ const FileButton = styled.button`
   padding: 1rem;
   width: 100%;
   background-color: ${props => props.theme.background};
-  opacity: 0.4;
   color: ${props => props.theme.text};
   text-align: left;
   border: none;
@@ -92,12 +91,9 @@ const FileButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
 
-  ${({ active }) =>
-    active &&
-    `
-      opacity: 1;
-      border-left: 4px solid ${props => props.theme.primary};
-  `};
+  opacity: ${({ active }) => (active ? 1 : 0.4)};
+  border-left: ${({ active, theme }) =>
+    active ? `4px solid ${theme.primary}` : "none"};
 
   &:hover {
     opacity: 1;

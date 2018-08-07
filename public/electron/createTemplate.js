@@ -1,4 +1,7 @@
 const { BrowserWindow, app } = require("electron")
+const settings = require("electron-settings")
+
+const colorTheme = settings.get("colorTheme")
 
 module.exports = function createTemplate(mainWindow, actions) {
   const template = [
@@ -51,12 +54,16 @@ module.exports = function createTemplate(mainWindow, actions) {
         { type: "separator" },
         {
           label: "Light mode",
+          type: "radio",
+          checked: colorTheme === "light",
           click: () => {
             mainWindow.webContents.send("switch-color-theme", "light")
           },
         },
         {
           label: "Dark mode",
+          type: "radio",
+          checked: colorTheme === "dark",
           click: () => {
             mainWindow.webContents.send("switch-color-theme", "dark")
           },
