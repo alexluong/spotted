@@ -1,2 +1,1 @@
-import unifiedActions from "./unified"
-export default unifiedActions
+export * from "./unified"

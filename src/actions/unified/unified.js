@@ -1,78 +1,49 @@
-/**
- * TODO: CLEAN UP!!!!!
- */
-
+import React from "react"
 import unified from "unified"
-// import vfile from "vfile"
-import remark from "remark"
+import rehype from "rehype"
 import remark2rehype from "remark-rehype"
-import remark2retext from "remark-retext"
+import rehype2retext from "rehype-retext"
 import markdown from "remark-parse"
-import html from "rehype-parse"
-import stripMarkdown from "strip-markdown"
-import rehypeStringify from "rehype-stringify"
-import retextStringify from "retext-stringify"
+import htmlParser from "rehype-parse"
+import htmlStringify from "rehype-stringify"
 import english from "retext-english"
-// import indefiniteArticle from "retext-indefinite-article"
-
-// Analysis
-// import readability from "./analysis/readability"
-
-const unifiedActions = {}
-
-const englishProcessor = unified().use(english)
-
-// const toTextProcessor = unified()
-//   .use(markdown)
-//   .use(remark2retext, unified().use(english))
-//   .use(retextStringify)
+import readability from "retext-readability"
+import rehype2react from "rehype-react"
 
 const toHtmlProcessor = unified()
   .use(markdown)
   .use(remark2rehype)
-  .use(rehypeStringify)
+  .use(htmlStringify)
 
-const mdProcessor = unified().use(markdown)
-const htmlProcessor = unified().use(html)
-
-unifiedActions.createMarkdownTree = function(md) {
-  return mdProcessor.runSync(mdProcessor.parse(md))
-}
-
-unifiedActions.createHtmlTree = function(htmlContent) {
-  return htmlProcessor.runSync(htmlProcessor.parse(htmlContent))
-}
-
-unifiedActions.convertMarkdownToHTML = function(md) {
+export const convertMarkdownToHtml = function(md) {
   return String(toHtmlProcessor.processSync(md))
 }
 
-unifiedActions.analyze = function(type, value) {
-  switch (type) {
-    case "text":
-      return 1
-    case "readability":
-      return analyzeReadability(value)
-    default:
-      return ""
-  }
-}
-
-unifiedActions.convertMarkdownToText = function convertMarkdownToText(md) {
-  return String(
-    remark()
-      .use(stripMarkdown)
-      .processSync(md),
+const readabilityProcessor = unified()
+  .use(htmlParser)
+  .use(
+    rehype2retext,
+    unified()
+      .use(english)
+      .use(readability),
   )
+  .use(htmlStringify)
+
+export const analyzeReadability = function(html) {
+  return readabilityProcessor.processSync(html)
 }
 
-unifiedActions.buildTextTree = function(text) {
-  return englishProcessor.runSync(englishProcessor.parse(text))
-}
+const htmlToReactProcessor = rehype().use(rehype2react, {
+  createElement: (component, props = {}, children = []) => {
+    const notElements = ["html", "head", "body"]
+    if (notElements.includes(component)) {
+      return children
+    }
 
-function analyzeReadability(md) {
-  // const text = readability(md)
-  return 1
-}
+    return React.createElement(component, props, children)
+  },
+})
 
-export default unifiedActions
+export const convertHtmlToReact = function(html) {
+  return htmlToReactProcessor.processSync(html)
+}

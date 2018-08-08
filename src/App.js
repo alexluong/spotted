@@ -9,8 +9,8 @@ import FilesWindow from "components/FilesWindow"
 import EditorWindow from "components/EditorWindow"
 import ContentWindow from "components/ContentWindow"
 
-import fileActions from "actions/file"
-import unifiedActions from "actions/unified"
+import * as fileActions from "actions/file"
+import * as unifiedActions from "actions/unified"
 
 const settings = window.require("electron-settings")
 
@@ -34,8 +34,8 @@ class App extends React.Component {
     }
   }
 
-  setStateWithHTML = async state => {
-    const html = await unifiedActions.convertMarkdownToHTML(state.markdown)
+  setStateWithHTML = state => {
+    const html = unifiedActions.convertMarkdownToHtml(state.markdown)
 
     this.setState({ ...state, html })
   }

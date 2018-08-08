@@ -1,8 +1,6 @@
 const fs = window.require("fs")
 
-const fileActions = {}
-
-fileActions.readFilesInDirectory = function(directory) {
+export const readFilesInDirectory = function(directory) {
   return new Promise((resolve, reject) => {
     fs.readdir(directory, async (error, files) => {
       if (error) {
@@ -37,11 +35,11 @@ function readFileStats(file, directory) {
   })
 }
 
-fileActions.readFile = function(path) {
+export const readFile = function(path) {
   return fs.readFileSync(path).toString()
 }
 
-fileActions.saveFile = function(path, content) {
+export const saveFile = function(path, content) {
   return new Promise((resolve, reject) => {
     fs.writeFile(path, content, error => {
       if (error) {
@@ -53,7 +51,7 @@ fileActions.saveFile = function(path, content) {
   })
 }
 
-fileActions.getFileStats = function(path) {
+export const getFileStats = function(path) {
   return new Promise((resolve, reject) => {
     fs.stat(path, (error, stats) => {
       if (error) {
@@ -64,5 +62,3 @@ fileActions.getFileStats = function(path) {
     })
   })
 }
-
-export default fileActions

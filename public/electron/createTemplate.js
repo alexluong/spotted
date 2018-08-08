@@ -84,14 +84,12 @@ module.exports = function createTemplate(mainWindow, actions) {
           accelerator: "CmdOrCtrl+Shift+A",
           click: () => {
             mainWindow.webContents.send("analyze", "text")
-            mainWindow.webContents.reloadIgnoringCache()
           },
         },
         {
           label: "Readability",
           click: () => {
             mainWindow.webContents.send("analyze", "readability")
-            mainWindow.webContents.reloadIgnoringCache()
           },
         },
       ],
