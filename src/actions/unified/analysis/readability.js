@@ -18,7 +18,7 @@ const analyzeReadability = function(text) {
 
   warnings.forEach(warning => {
     html = html.replace(
-      new RegExp(warning.text, "m"),
+      warning.text,
       text =>
         `<span style="box-shadow: 0px 2px 0px 0px ${getColor(
           warning.score,
