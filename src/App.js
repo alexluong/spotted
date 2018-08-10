@@ -88,7 +88,6 @@ class App extends React.Component {
   }
 
   analyze(type) {
-    // unifiedActions.analyze(type, this.state.markdown)
     this.setState({ analysis: type })
   }
 

@@ -1,4 +1,21 @@
+import unified from "unified"
+import htmlParser from "rehype-parse"
+import rehype2retext from "rehype-retext"
+import english from "retext-english"
+import readability from "retext-readability"
+import htmlStringify from "rehype-stringify"
+
 import * as actions from "../unified"
+
+const processor = unified()
+  .use(htmlParser)
+  .use(
+    rehype2retext,
+    unified()
+      .use(english)
+      .use(readability),
+  )
+  .use(htmlStringify)
 
 const analyzeReadability = function(text) {
   let html = text
@@ -7,7 +24,7 @@ const analyzeReadability = function(text) {
     return null
   }
 
-  const readabilityAnalysis = actions.analyzeReadability(html)
+  const readabilityAnalysis = processor.processSync(html)
 
   const warnings = readabilityAnalysis.messages.map(
     ({ location, confidence }) => ({

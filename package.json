@@ -54,6 +54,7 @@
     "retext-indefinite-article": "^1.1.4",
     "retext-readability": "^4.2.0",
     "unified": "^7.0.0",
+    "write-good": "^0.13.0",
     "yoastseo": "^1.36.0"
   },
   "devDependencies": {

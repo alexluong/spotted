@@ -81,9 +81,14 @@ module.exports = function createTemplate(mainWindow, actions) {
       submenu: [
         {
           label: "Text",
-          accelerator: "CmdOrCtrl+Shift+A",
           click: () => {
             mainWindow.webContents.send("analyze", "text")
+          },
+        },
+        {
+          label: "Spelling and Grammar",
+          click: () => {
+            mainWindow.webContents.send("analyze", "spelling-and-grammar")
           },
         },
         {

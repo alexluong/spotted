@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 // Components
 import ContentWindowContainer from "./Container"
+import SpellingAndGrammar from "./AnalysisContent/SpellingAndGrammar"
 import Readability from "./AnalysisContent/Readability"
 
 const propTypes = {
@@ -15,6 +16,8 @@ const ContentWindow = ({ html, markdown, analysis, ...props }) => (
     {(() => {
       if (!analysis) {
         return <div dangerouslySetInnerHTML={{ __html: html }} />
+      } else if (analysis === "spelling-and-grammar") {
+        return <SpellingAndGrammar markdown={markdown} html={html} />
       } else if (analysis === "readability") {
         return <Readability markdown={markdown} html={html} />
       }
