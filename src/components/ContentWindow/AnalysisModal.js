@@ -47,8 +47,8 @@ class AnalysisModal extends React.Component {
                   left: position.left,
                   width: popupWidth,
                   height: popupHeight,
-                  opacity: opacity,
                   transform: scale.interpolate(scale => `scale(${scale})`),
+                  opacity,
                 }}
               >
                 {reason}

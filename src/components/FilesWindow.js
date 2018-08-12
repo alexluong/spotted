@@ -1,6 +1,7 @@
 import React from "react"
-import styled, { css } from "react-emotion"
 import PropTypes from "prop-types"
+import styled, { css } from "react-emotion"
+import { Spring, animated } from "react-spring"
 import dateFns from "date-fns"
 
 import Button from "elements/Button"
@@ -17,6 +18,12 @@ class FilesWindow extends React.Component {
 
   state = { newEntryName: "" }
 
+  constructor(props) {
+    super(props)
+
+    this.newEntryInput = React.createRef()
+  }
+
   addNewFile = e => {
     e.preventDefault()
 
@@ -29,24 +36,45 @@ class FilesWindow extends React.Component {
 
     return (
       <Toggle>
-        {({ on: isAddingNewEntry, toggle }) => (
+        {({ on: isAddingNewEntry, open, close }) => (
           <FilesWindowContainer>
-            <Button onClick={toggle}>+ New Entry</Button>
+            <Button
+              onClick={() => {
+                if (!isAddingNewEntry) {
+                  open()
+                  this.newEntryInput.focus()
+                }
+              }}
+            >
+              + New Entry
+            </Button>
 
-            {isAddingNewEntry && (
-              <form onSubmit={this.addNewFile} className={formCss}>
-                <Input
-                  autoFocus
-                  type="text"
-                  placeholder="Title"
-                  value={newEntryName}
-                  onChange={e => {
-                    this.setState({ newEntryName: e.target.value })
+            <Spring
+              native
+              from={{ height: isAddingNewEntry ? 0 : "auto" }}
+              to={{ height: isAddingNewEntry ? "auto" : 0 }}
+            >
+              {({ height }) => (
+                <animated.form
+                  className={formCss}
+                  onSubmit={this.addNewFile}
+                  style={{
+                    height: height,
                   }}
-                  onBlur={toggle}
-                />
-              </form>
-            )}
+                >
+                  <Input
+                    innerRef={instance => (this.newEntryInput = instance)}
+                    type="text"
+                    placeholder="Title"
+                    value={newEntryName}
+                    onBlur={close}
+                    onChange={e => {
+                      this.setState({ newEntryName: e.target.value })
+                    }}
+                  />
+                </animated.form>
+              )}
+            </Spring>
 
             <div className={filesContainerCss}>
               {isAddingNewEntry && <div className={overlayCss} />}
