@@ -6,6 +6,7 @@ const light = {
   backgroundLight: "#dedede",
   text: "#121212",
   headerText: "#bbb",
+  popup: "#f1f1f1",
 }
 
 const dark = {
@@ -16,6 +17,7 @@ const dark = {
   backgroundLight: "#373142",
   text: "#fff",
   headerText: "#75717c",
+  popup: "#2c243d",
 }
 
 const color = { light, dark }

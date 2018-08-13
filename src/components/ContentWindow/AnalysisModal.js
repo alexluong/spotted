@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { css } from "react-emotion"
+import styled from "react-emotion"
 import { Transition, animated } from "react-spring"
 
 class AnalysisModal extends React.Component {
@@ -17,13 +17,13 @@ class AnalysisModal extends React.Component {
   render() {
     const { target, reason } = this.state
 
-    const popupWidth = 250
-    const popupHeight = 80
+    const popupWidth = 200
+    const popupHeight = 75
     const position = {}
 
     if (target) {
       const targetRect = target.getBoundingClientRect()
-      position.top = targetRect.top - popupHeight
+      position.top = targetRect.top - popupHeight - 5
       position.left = targetRect.left + targetRect.width / 2 - popupWidth / 2
     } else {
       position.top = 0
@@ -39,8 +39,7 @@ class AnalysisModal extends React.Component {
       >
         {target
           ? ({ opacity, scale }) => (
-              <animated.div
-                className={popupCss}
+              <PopUp
                 style={{
                   position: "absolute",
                   top: position.top,
@@ -52,7 +51,7 @@ class AnalysisModal extends React.Component {
                 }}
               >
                 {reason}
-              </animated.div>
+              </PopUp>
             )
           : null}
       </Transition>,
@@ -65,10 +64,15 @@ class AnalysisModal extends React.Component {
 
 export default AnalysisModal
 
-const popupCss = css`
-  background-color: pink;
+const PopUp = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 4px;
+  background-color: ${props => props.theme.popup};
+  color: red;
+  box-shadow: 5px 3px 3px 0px rgba(0, 0, 0, 0.16);
+  padding: 2rem 2.3rem;
+  line-height: 1.2;
 `
