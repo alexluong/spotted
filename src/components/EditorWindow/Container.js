@@ -22,10 +22,6 @@ const EditorWindowContainer = styled.div`
     color: ${props => props.theme.text};
   }
 
-  .ace_editor .ace_gutter-active-line {
-    background-color: ${props => props.theme.backgroundLight};
-  }
-
   .ace_editor .ace_heading {
     color: ${props => props.theme.primary};
   }
@@ -40,6 +36,12 @@ const EditorWindowContainer = styled.div`
 
   .ace_active-line {
     background: ${props => props.theme.backgroundLight} !important;
+  }
+
+  .ace_selected-word,
+  .ace_selection {
+    background: ${props => props.theme.editorHighlight} !important;
+    border-color: ${props => props.theme.editorHighlight} !important;
   }
 `
 

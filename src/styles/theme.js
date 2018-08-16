@@ -2,11 +2,12 @@ const light = {
   primary: "#82d8d8",
   secondary: "#e54b4b",
   background: "#fff",
-  backgroundDark: "#dedede",
+  backgroundDark: "#bababa",
   backgroundLight: "#dedede",
   text: "#121212",
   headerText: "#bbb",
   popup: "#f1f1f1",
+  editorHighlight: "#bababa",
 }
 
 const dark = {
@@ -18,6 +19,7 @@ const dark = {
   text: "#fff",
   headerText: "#75717c",
   popup: "#2c243d",
+  editorHighlight: "#44475a",
 }
 
 const color = { light, dark }

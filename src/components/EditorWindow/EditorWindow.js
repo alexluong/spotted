@@ -21,6 +21,7 @@ const EditorWindow = ({ value, onEditorChange, ...props }) => (
       showPrintMargin={false}
       value={value}
       onChange={onEditorChange}
+      wrapEnabled={true}
     />
   </EditorWindowContainer>
 )
